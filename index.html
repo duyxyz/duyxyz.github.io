@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV Nguyễn Minh Duy</title>
+  <style>
+    /* Loader full màn hình với 5 chấm nhảy */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loader {
+      display: flex;
+      gap: 8px;
+    }
+
+    .loader .dot {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #16b0c1;
+      animation: jump 0.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes jump {
+      25% {
+        background: blue;
+        transform: translateY(1rem) translateX(0) scale(0.7);
+      }
+      50% {
+        opacity: 0;
+        transform: translateY(3rem) translateX(-2rem) scale(0.7);
+      }
+      100% {
+        background: blue;
+        transform: translateY(-4rem) translateX(0) scale(0.2);
+      }
+    }
+
+    .loader .dot:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .loader .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loader .dot:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .loader .dot:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .loader .dot:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    /* Body chính: */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      width: 100%;
+      margin: 0;
+      padding: 40px 60px;
+      background-color: #f9f9f9;
+      color: #222;
+      box-sizing: border-box;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: nowrap;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #00539C;
+      flex-shrink: 0;
+    }
+    header div.name-contact {
+      flex: 1 1 auto;
+      min-width: 220px;
+    }
+    h1 {
+      font-size: 3em;
+      margin: 0 0 8px 0;
+      color: #00539C;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    .contact-info {
+      font-size: 1.1em;
+      line-height: 1.5;
+    }
+    .contact-info a {
+      color: #00539C;
+      text-decoration: none;
+    }
+    .section {
+      margin-bottom: 40px;
+      max-width: 900px;
+    }
+    .section h2 {
+      border-bottom: 3px solid #00539C;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #00539C;
+      font-size: 1.8em;
+    }
+    ul {
+      padding-left: 20px;
+      font-size: 1.1em;
+    }
+    li {
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 1.15em;
+      max-width: 900px;
+    }
+    .footer {
+      font-size: 0.85em;
+      color: #666;
+      text-align: center;
+      margin-top: 60px;
+      border-top: 1px solid #ddd;
+      padding-top: 16px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 700px) {
+      body {
+        padding: 20px 16px;
+      }
+      header {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      header img {
+        width: 100px;
+        height: 100px;
+      }
+      h1 {
+        white-space: normal;
+      }
+      .section {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader full màn hình -->
+  <div id="page-loader">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <header>
+    <img src="https://avatars.githubusercontent.com/u/217141310?s=400&u=0a8c2c785b31a77a792f438339a32f0d3b267366&v=4" alt="Ảnh đại diện Nguyễn Minh Duy" />
+    <div class="name-contact">
+      <h1>Nguyễn Minh Duy</h1>
+      <div class="contact-info">
+        <div>Email: <a href="mailto:ngduy10102006@gmail.com">ngduy10102006@gmail.com</a></div>
+        <div>Điện thoại: <a href="tel:+84329200210">0329200210</a></div>
+        <div>Facebook: <a href="https://www.facebook.com/S999999" target="_blank" rel="noopener noreferrer">https://www.facebook.com/S999999</a></div>
+        <div>GreasyFork: <a href="https://greasyfork.org/users/1485109" target="_blank" rel="noopener noreferrer">https://greasyfork.org/users/1485109</a></div>
+        <div>SourceForge: <a href="https://sourceforge.net/u/duy1nuis/profile" target="_blank" rel="noopener noreferrer">https://sourceforge.net/u/duy1nuis/profile</a></div>
+        <div>GitHub: 
+          <a href="https://github.com/1DiorLIV" target="_blank" rel="noopener noreferrer">https://github.com/1DiorLIV</a> | 
+          <a href="https://github.com/DuyNguyen2k6" target="_blank" rel="noopener noreferrer">https://github.com/DuyNguyen2k6</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Tóm tắt bản thân</h2>
+    <p>
+      Tôi là Nguyễn Minh Duy, đam mê phát triển phần mềm và công nghệ với nhiều dự án cá nhân trên các nền tảng mã nguồn mở. Tôi có kinh nghiệm sử dụng nhiều công cụ lập trình và luôn mong muốn học hỏi và phát triển kỹ năng mới.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Kỹ năng nổi bật</h2>
+    <ul>
+      <li>Lập trình: Python, JavaScript, HTML/CSS</li>
+      <li>Quản lý dự án mã nguồn mở</li>
+      <li>Sử dụng Git và GitHub hiệu quả</li>
+      <li>Tự động hóa công việc bằng script (PowerShell, Bash)</li>
+      <li>Tham gia cộng đồng phát triển và đóng góp code</li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    © 2025 Nguyễn Minh Duy
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('page-loader');
+      if (loader) {
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          loader.style.transition = 'opacity 0.5s ease';
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 500);
+        }, 800);
+      }
+    });
+  </script>
+</body>
+</html>
