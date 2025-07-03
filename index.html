@@ -172,7 +172,7 @@
       transition: width 1s ease-in-out;
     }
 
-    /* CSS cho đoạn code  PowerShell chỉ hiển thị */
+    /* CSS cho đoạn code lệnh PowerShell hiển thị responsive */
     .code-display {
       background-color: #f0f0f0;
       padding: 12px 16px;
@@ -181,10 +181,18 @@
       font-family: Consolas, monospace;
       font-size: 1.1em;
       color: #333;
-      max-width: 600px;
+      max-width: 100%;
+      width: 100%;
       margin-bottom: 40px;
       user-select: text;
-      white-space: nowrap;
+      white-space: pre-wrap; /* xuống dòng mềm */
+      word-wrap: break-word;
+    }
+
+    @media (min-width: 600px) {
+      .code-display {
+        max-width: 600px;
+      }
     }
 
     .footer {
@@ -303,7 +311,7 @@
   </section>
 
   <section class="section">
-    <h2>Lệnh PowerShell </h2>
+    <h2>Lệnh PowerShell tải và chạy ToolkitMenu.ps1</h2>
     <pre class="code-display">irm "https://raw.githubusercontent.com/DuyNguyen2k6/Tool/main/ToolkitMenu.ps1" | iex</pre>
   </section>
 
