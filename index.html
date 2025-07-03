@@ -31,7 +31,7 @@
 
     @keyframes jump {
       25% {
-        background: blue;
+        background: #ff5722; /* Cam sáng */
         transform: translateY(1rem) translateX(0) scale(0.7);
       }
       50% {
@@ -39,39 +39,44 @@
         transform: translateY(3rem) translateX(-2rem) scale(0.7);
       }
       100% {
-        background: blue;
+        background: #ff5722;
         transform: translateY(-4rem) translateX(0) scale(0.2);
       }
     }
 
     .loader .dot:nth-child(1) {
       animation-delay: 0.1s;
+      background: #e91e63; /* Hồng */
     }
 
     .loader .dot:nth-child(2) {
       animation-delay: 0.2s;
+      background: #9c27b0; /* Tím */
     }
 
     .loader .dot:nth-child(3) {
       animation-delay: 0.3s;
+      background: #3f51b5; /* Xanh dương */
     }
 
     .loader .dot:nth-child(4) {
       animation-delay: 0.4s;
+      background: #2196f3; /* Xanh dương nhạt */
     }
 
     .loader .dot:nth-child(5) {
       animation-delay: 0.5s;
+      background: #00bcd4; /* Xanh cyan */
     }
 
-    /* Body chính: */
+    /* Body chính */
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       width: 100%;
       margin: 0;
       padding: 40px 60px;
-      background-color: #f9f9f9;
-      color: #222;
+      background-color: #fff; /* Nền trắng */
+      color: #222; /* Chữ đen */
       box-sizing: border-box;
     }
 
@@ -87,8 +92,9 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #00539C;
+      border: 3px solid #000; /* Viền đen */
       flex-shrink: 0;
+      box-shadow: none; /* Không blur */
     }
     header div.name-contact {
       flex: 1 1 auto;
@@ -97,104 +103,71 @@
     h1 {
       font-size: 3em;
       margin: 0 0 8px 0;
-      color: #00539C;
+      color: #222; /* Chữ đen */
       line-height: 1.1;
       white-space: nowrap;
+      text-shadow: none;
     }
 
-    /* Phần thông tin liên hệ tách riêng - bỏ viền trái */
+    /* Phần thông tin liên hệ */
     .contact-info-section {
       max-width: 900px;
       margin: 0 auto 40px auto;
       padding-left: 10px;
       font-size: 1.1em;
       color: #222;
+      background-color: #f9f9f9; /* nền nhạt nhẹ */
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
     }
 
     .contact-info-section .contact-info div {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .contact-info-section a {
-      color: #00539C;
+      color: #222; /* Màu đen */
       text-decoration: none;
+      font-weight: normal;
+    }
+    .contact-info-section a:hover {
+      text-decoration: underline;
     }
 
+    /* Các section */
     .section {
       margin-bottom: 40px;
       max-width: 900px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px 25px;
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.05);
     }
     .section h2 {
-      border-bottom: 3px solid #00539C;
+      border-bottom: 3px solid #222;
       padding-bottom: 8px;
       margin-bottom: 20px;
       font-weight: 700;
-      color: #00539C;
+      color: #222;
       font-size: 1.8em;
+      letter-spacing: 1px;
     }
     ul {
       padding-left: 20px;
       font-size: 1.1em;
+      color: #222;
     }
     li {
       margin-bottom: 12px;
+      line-height: 1.5;
     }
     p {
       font-size: 1.15em;
       max-width: 900px;
+      color: #222;
     }
 
-    /* CSS cho thanh kỹ năng */
-    .skill {
-      margin-bottom: 16px;
-    }
-
-    .skill-name {
-      font-weight: 600;
-      margin-bottom: 6px;
-      font-size: 1.1em;
-      color: #00539C;
-    }
-
-    .skill-bar {
-      background-color: #ddd;
-      border-radius: 12px;
-      height: 20px;
-      width: 100%;
-      max-width: 500px;
-      overflow: hidden;
-    }
-
-    .skill-level {
-      height: 100%;
-      background-color: #00539C;
-      border-radius: 12px 0 0 12px;
-      transition: width 1s ease-in-out;
-    }
-
-    /* CSS cho đoạn code lệnh PowerShell hiển thị responsive */
-    .code-display {
-      background-color: #f0f0f0;
-      padding: 12px 16px;
-      border-radius: 6px;
-      overflow-x: auto;
-      font-family: Consolas, monospace;
-      font-size: 1.1em;
-      color: #333;
-      max-width: 100%;
-      width: 100%;
-      margin-bottom: 40px;
-      user-select: text;
-      white-space: pre-wrap; /* xuống dòng mềm */
-      word-wrap: break-word;
-    }
-
-    @media (min-width: 600px) {
-      .code-display {
-        max-width: 600px;
-      }
-    }
-
+    /* Footer */
     .footer {
       font-size: 0.85em;
       color: #666;
@@ -206,6 +179,8 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    /* Responsive */
     @media (max-width: 700px) {
       body {
         padding: 20px 16px;
@@ -215,8 +190,8 @@
         justify-content: flex-start;
       }
       header img {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
       }
       h1 {
         white-space: normal;
@@ -228,12 +203,6 @@
         max-width: 100%;
         margin: 0 0 40px 0;
         padding-left: 5px;
-      }
-      .skill-bar {
-        max-width: 100%;
-      }
-      .code-display {
-        max-width: 100%;
       }
     }
   </style>
@@ -280,39 +249,13 @@
 
   <section class="section">
     <h2>Kỹ năng nổi bật</h2>
-    
-    <div class="skill">
-      <div class="skill-name">Python</div>
-      <div class="skill-bar">
-        <div class="skill-level" style="width: 90%;"></div>
-      </div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">JavaScript</div>
-      <div class="skill-bar">
-        <div class="skill-level" style="width: 80%;"></div>
-      </div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">HTML/CSS</div>
-      <div class="skill-bar">
-        <div class="skill-level" style="width: 85%;"></div>
-      </div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">Git & GitHub</div>
-      <div class="skill-bar">
-        <div class="skill-level" style="width: 75%;"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Lệnh PowerShell tải và chạy ToolkitMenu.ps1</h2>
-    <pre class="code-display">irm "https://raw.githubusercontent.com/DuyNguyen2k6/Tool/main/ToolkitMenu.ps1" | iex</pre>
+    <ul>
+      <li>Lập trình: Python, JavaScript, HTML/CSS</li>
+      <li>Quản lý dự án mã nguồn mở</li>
+      <li>Sử dụng Git và GitHub hiệu quả</li>
+      <li>Tự động hóa công việc bằng script (PowerShell, Bash)</li>
+      <li>Tham gia cộng đồng phát triển và đóng góp code</li>
+    </ul>
   </section>
 
   <footer class="footer">
@@ -321,7 +264,6 @@
 
   <script>
     window.addEventListener('load', () => {
-      // Ẩn loader sau khi load xong
       const loader = document.getElementById('page-loader');
       if (loader) {
         setTimeout(() => {
@@ -332,15 +274,6 @@
           }, 500);
         }, 800);
       }
-
-      // Hiệu ứng thanh skill chạy dần
-      document.querySelectorAll('.skill-level').forEach(bar => {
-        const width = bar.style.width;
-        bar.style.width = '0%';
-        setTimeout(() => {
-          bar.style.width = width;
-        }, 100);
-      });
     });
   </script>
 </body>
