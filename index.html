@@ -79,7 +79,7 @@
       display: flex;
       align-items: center;
       gap: 24px;
-      margin-bottom: 20px; /* giảm margin-bottom để phần info gần hơn */
+      margin-bottom: 20px;
       flex-wrap: nowrap;
     }
     header img {
@@ -105,11 +105,10 @@
     /* Phần thông tin liên hệ tách riêng - bỏ viền trái */
     .contact-info-section {
       max-width: 900px;
-      margin: 0 auto 40px auto; /* căn giữa, cách dưới 40px */
+      margin: 0 auto 40px auto;
       padding-left: 10px;
       font-size: 1.1em;
       color: #222;
-      /* border-left: 3px solid #00539C; */ /* Đã bỏ viền trái */
     }
 
     .contact-info-section .contact-info div {
@@ -144,6 +143,50 @@
       font-size: 1.15em;
       max-width: 900px;
     }
+
+    /* CSS cho thanh kỹ năng */
+    .skill {
+      margin-bottom: 16px;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 1.1em;
+      color: #00539C;
+    }
+
+    .skill-bar {
+      background-color: #ddd;
+      border-radius: 12px;
+      height: 20px;
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+    }
+
+    .skill-level {
+      height: 100%;
+      background-color: #00539C;
+      border-radius: 12px 0 0 12px;
+      transition: width 1s ease-in-out;
+    }
+
+    /* CSS cho đoạn code  PowerShell chỉ hiển thị */
+    .code-display {
+      background-color: #f0f0f0;
+      padding: 12px 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      font-size: 1.1em;
+      color: #333;
+      max-width: 600px;
+      margin-bottom: 40px;
+      user-select: text;
+      white-space: nowrap;
+    }
+
     .footer {
       font-size: 0.85em;
       color: #666;
@@ -177,6 +220,12 @@
         max-width: 100%;
         margin: 0 0 40px 0;
         padding-left: 5px;
+      }
+      .skill-bar {
+        max-width: 100%;
+      }
+      .code-display {
+        max-width: 100%;
       }
     }
   </style>
@@ -223,13 +272,39 @@
 
   <section class="section">
     <h2>Kỹ năng nổi bật</h2>
-    <ul>
-      <li>Lập trình: Python, JavaScript, HTML/CSS</li>
-      <li>Quản lý dự án mã nguồn mở</li>
-      <li>Sử dụng Git và GitHub hiệu quả</li>
-      <li>Tự động hóa công việc bằng script (PowerShell, Bash)</li>
-      <li>Tham gia cộng đồng phát triển và đóng góp code</li>
-    </ul>
+    
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar">
+        <div class="skill-level" style="width: 90%;"></div>
+      </div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-bar">
+        <div class="skill-level" style="width: 80%;"></div>
+      </div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">HTML/CSS</div>
+      <div class="skill-bar">
+        <div class="skill-level" style="width: 85%;"></div>
+      </div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">Git & GitHub</div>
+      <div class="skill-bar">
+        <div class="skill-level" style="width: 75%;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Lệnh PowerShell </h2>
+    <pre class="code-display">irm "https://raw.githubusercontent.com/DuyNguyen2k6/Tool/main/ToolkitMenu.ps1" | iex</pre>
   </section>
 
   <footer class="footer">
@@ -238,6 +313,7 @@
 
   <script>
     window.addEventListener('load', () => {
+      // Ẩn loader sau khi load xong
       const loader = document.getElementById('page-loader');
       if (loader) {
         setTimeout(() => {
@@ -248,6 +324,15 @@
           }, 500);
         }, 800);
       }
+
+      // Hiệu ứng thanh skill chạy dần
+      document.querySelectorAll('.skill-level').forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 100);
+      });
     });
   </script>
 </body>
