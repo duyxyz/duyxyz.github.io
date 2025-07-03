@@ -1,214 +1,260 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CV Nguyễn Minh Duy</title>
-  <style>
-    /* Loader full màn hình với 5 chấm nhảy */
-    #page-loader {
-      position: fixed;
-      inset: 0;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CV Nguyễn Minh Duy</title>
+<style>
+  /* Loader full màn hình với 5 chấm nhảy */
+  #page-loader {
+    position: fixed;
+    inset: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
 
-    .loader {
-      display: flex;
-      gap: 8px;
-    }
+  .loader {
+    display: flex;
+    gap: 8px;
+  }
 
-    .loader .dot {
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #16b0c1;
-      animation: jump 0.8s ease-in-out infinite alternate;
-    }
+  .loader .dot {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #16b0c1;
+    animation: jump 0.8s ease-in-out infinite alternate;
+  }
 
-    @keyframes jump {
-      25% {
-        background: #ff5722; /* Cam sáng */
-        transform: translateY(1rem) translateX(0) scale(0.7);
-      }
-      50% {
-        opacity: 0;
-        transform: translateY(3rem) translateX(-2rem) scale(0.7);
-      }
-      100% {
-        background: #ff5722;
-        transform: translateY(-4rem) translateX(0) scale(0.2);
-      }
+  @keyframes jump {
+    25% {
+      background: #ff5722;
+      transform: translateY(1rem) translateX(0) scale(0.7);
     }
-
-    .loader .dot:nth-child(1) {
-      animation-delay: 0.1s;
-      background: #e91e63; /* Hồng */
+    50% {
+      opacity: 0;
+      transform: translateY(3rem) translateX(-2rem) scale(0.7);
     }
-
-    .loader .dot:nth-child(2) {
-      animation-delay: 0.2s;
-      background: #9c27b0; /* Tím */
+    100% {
+      background: #ff5722;
+      transform: translateY(-4rem) translateX(0) scale(0.2);
     }
+  }
 
-    .loader .dot:nth-child(3) {
-      animation-delay: 0.3s;
-      background: #3f51b5; /* Xanh dương */
-    }
+  .loader .dot:nth-child(1) {
+    animation-delay: 0.1s;
+    background: #e91e63;
+  }
 
-    .loader .dot:nth-child(4) {
-      animation-delay: 0.4s;
-      background: #2196f3; /* Xanh dương nhạt */
-    }
+  .loader .dot:nth-child(2) {
+    animation-delay: 0.2s;
+    background: #9c27b0;
+  }
 
-    .loader .dot:nth-child(5) {
-      animation-delay: 0.5s;
-      background: #00bcd4; /* Xanh cyan */
-    }
+  .loader .dot:nth-child(3) {
+    animation-delay: 0.3s;
+    background: #3f51b5;
+  }
 
-    /* Body chính */
+  .loader .dot:nth-child(4) {
+    animation-delay: 0.4s;
+    background: #2196f3;
+  }
+
+  .loader .dot:nth-child(5) {
+    animation-delay: 0.5s;
+    background: #00bcd4;
+  }
+
+  /* Body chính */
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    margin: 0;
+    padding: 40px 60px;
+    background-color: #fff;
+    color: #222;
+    box-sizing: border-box;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #000;
+    flex-shrink: 0;
+    box-shadow: none;
+  }
+  header div.name-contact {
+    flex: 1 1 auto;
+    min-width: 220px;
+  }
+  h1 {
+    font-size: 3em;
+    margin: 0 0 8px 0;
+    color: #222;
+    line-height: 1.1;
+    white-space: nowrap;
+    text-shadow: none;
+  }
+
+  /* Thông tin liên hệ */
+  .contact-info-section {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    padding-left: 10px;
+    font-size: 1.1em;
+    color: #222;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    white-space: normal;
+  }
+
+  .contact-info-section .contact-info div {
+    margin-bottom: 10px;
+    word-break: break-word;
+  }
+
+  .contact-info-section a {
+    color: #222;
+    text-decoration: none;
+    font-weight: normal;
+  }
+  .contact-info-section a:hover {
+    text-decoration: underline;
+  }
+
+  /* Các section */
+  .section {
+    margin-bottom: 40px;
+    max-width: 900px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 25px;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.05);
+  }
+  .section h2 {
+    border-bottom: 3px solid #222;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #222;
+    font-size: 1.8em;
+    letter-spacing: 1px;
+    white-space: normal;
+  }
+  ul {
+    padding-left: 20px;
+    font-size: 1.1em;
+    color: #222;
+  }
+  li {
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  p {
+    font-size: 1.15em;
+    max-width: 900px;
+    color: #222;
+  }
+
+  /* Footer */
+  .footer {
+    font-size: 0.85em;
+    color: #666;
+    text-align: center;
+    margin-top: 60px;
+    border-top: 1px solid #ddd;
+    padding-top: 16px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Responsive cho mobile - tối ưu full chiều rộng */
+  @media (max-width: 700px) {
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      width: 100%;
-      margin: 0;
-      padding: 40px 60px;
-      background-color: #fff; /* Nền trắng */
-      color: #222; /* Chữ đen */
-      box-sizing: border-box;
+      padding: 15px 10px !important;
+      overflow-x: hidden;
     }
-
     header {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 20px;
-      flex-wrap: nowrap;
+      gap: 12px !important;
+      flex-wrap: nowrap !important;
+      white-space: normal !important;
     }
     header img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #000; /* Viền đen */
-      flex-shrink: 0;
-      box-shadow: none; /* Không blur */
+      width: 48px !important;
+      height: 48px !important;
+      border: 2px solid #000 !important;
+      box-shadow: none !important;
     }
     header div.name-contact {
-      flex: 1 1 auto;
-      min-width: 220px;
+      min-width: auto !important;
     }
-    h1 {
-      font-size: 3em;
-      margin: 0 0 8px 0;
-      color: #222; /* Chữ đen */
-      line-height: 1.1;
-      white-space: nowrap;
-      text-shadow: none;
+    header h1 {
+      font-size: 1.25rem !important;
+      white-space: normal !important;
+      margin: 0 !important;
+      line-height: 1.2 !important;
     }
 
-    /* Phần thông tin liên hệ */
     .contact-info-section {
-      max-width: 900px;
-      margin: 0 auto 40px auto;
-      padding-left: 10px;
-      font-size: 1.1em;
-      color: #222;
-      background-color: #f9f9f9; /* nền nhạt nhẹ */
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      background-color: #fafafa !important;
+      padding: 12px 16px !important;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 0.1) !important;
+      border-radius: 8px !important;
+      font-size: 0.95rem !important;
+      line-height: 1.4 !important;
+      white-space: normal !important;
     }
-
-    .contact-info-section .contact-info div {
-      margin-bottom: 10px;
+    .contact-info-section div {
+      margin-bottom: 8px !important;
+      word-break: break-word !important;
     }
-
     .contact-info-section a {
-      color: #222; /* Màu đen */
-      text-decoration: none;
-      font-weight: normal;
+      color: #222 !important;
+      text-decoration: none !important;
+      font-weight: normal !important;
     }
     .contact-info-section a:hover {
-      text-decoration: underline;
+      text-decoration: underline !important;
     }
 
-    /* Các section */
     .section {
-      margin-bottom: 40px;
-      max-width: 900px;
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 20px 25px;
-      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.05);
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 15px 15px !important;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+      border-radius: 8px !important;
     }
     .section h2 {
-      border-bottom: 3px solid #222;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-      font-weight: 700;
-      color: #222;
-      font-size: 1.8em;
-      letter-spacing: 1px;
+      font-size: 1.4em !important;
+      white-space: normal !important;
     }
-    ul {
-      padding-left: 20px;
-      font-size: 1.1em;
-      color: #222;
+    p, li {
+      font-size: 1em !important;
     }
-    li {
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-    p {
-      font-size: 1.15em;
-      max-width: 900px;
-      color: #222;
-    }
-
-    /* Footer */
-    .footer {
-      font-size: 0.85em;
-      color: #666;
-      text-align: center;
-      margin-top: 60px;
-      border-top: 1px solid #ddd;
-      padding-top: 16px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Responsive */
-    @media (max-width: 700px) {
-      body {
-        padding: 20px 16px;
-      }
-      header {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-      }
-      header img {
-        width: 120px;
-        height: 120px;
-      }
-      h1 {
-        white-space: normal;
-      }
-      .section {
-        max-width: 100%;
-      }
-      .contact-info-section {
-        max-width: 100%;
-        margin: 0 0 40px 0;
-        padding-left: 5px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <!-- Loader full màn hình -->
   <div id="page-loader">
     <div class="loader">
       <div class="dot"></div>
@@ -230,13 +276,10 @@
     <div class="contact-info">
       <div>Email: <a href="mailto:ngduy10102006@gmail.com">ngduy10102006@gmail.com</a></div>
       <div>Điện thoại: <a href="tel:+84329200210">0329200210</a></div>
-      <div>Facebook: <a href="https://www.facebook.com/S999999" target="_blank" rel="noopener noreferrer">https://www.facebook.com/S999999</a></div>
-      <div>GreasyFork: <a href="https://greasyfork.org/users/1485109" target="_blank" rel="noopener noreferrer">https://greasyfork.org/users/1485109</a></div>
-      <div>SourceForge: <a href="https://sourceforge.net/u/duy1nuis/profile" target="_blank" rel="noopener noreferrer">https://sourceforge.net/u/duy1nuis/profile</a></div>
-      <div>GitHub: 
-        <a href="https://github.com/1DiorLIV" target="_blank" rel="noopener noreferrer">https://github.com/1DiorLIV</a> | 
-        <a href="https://github.com/DuyNguyen2k6" target="_blank" rel="noopener noreferrer">https://github.com/DuyNguyen2k6</a>
-      </div>
+      <div>Facebook:<br/><a href="https://www.facebook.com/S999999" target="_blank" rel="noopener noreferrer">https://www.facebook.com/S999999</a></div>
+      <div>GreasyFork:<br/><a href="https://greasyfork.org/users/1485109" target="_blank" rel="noopener noreferrer">https://greasyfork.org/users/1485109</a></div>
+      <div>SourceForge:<br/><a href="https://sourceforge.net/u/duy1nuis/profile" target="_blank" rel="noopener noreferrer">https://sourceforge.net/u/duy1nuis/profile</a></div>
+      <div>GitHub: <a href="https://github.com/1DiorLIV" target="_blank" rel="noopener noreferrer">https://github.com/1DiorLIV</a> | <a href="https://github.com/DuyNguyen2k6" target="_blank" rel="noopener noreferrer">https://github.com/DuyNguyen2k6</a></div>
     </div>
   </section>
 
