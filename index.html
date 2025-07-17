@@ -120,39 +120,27 @@
       }
     }
 
-    /* Loader */
-    #page-loader {
+    /* Hacker Loader Style */
+    #hacker-loader {
       position: fixed;
       inset: 0;
-      background: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #000;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      font-size: 16px;
+      line-height: 1.5;
       z-index: 9999;
-    }
-
-    .spinner {
-      width: 48px;
-      height: 48px;
-      border: 5px solid #ccc;
-      border-top: 5px solid #00bcd4;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      overflow-y: auto;
+      white-space: pre-wrap;
+      transition: opacity 1s ease;
     }
   </style>
 </head>
 <body>
 
-  <!-- Loader -->
-  <div id="page-loader">
-    <div class="spinner"></div>
-  </div>
+  <!-- Hacker Loading Effect -->
+  <div id="hacker-loader"></div>
 
   <div class="container">
     <header>
@@ -177,7 +165,7 @@
     <section class="section">
       <h2>Tóm tắt bản thân</h2>
       <p>
-        🤑🤓😭😄😐🤔🤫🤨🧐
+        🤑🤓😭😄😱🥹😐🤔🤫🤨🧐
       </p>
     </section>
 
@@ -198,13 +186,34 @@
   </div>
 
   <script>
-    window.addEventListener('load', () => {
-      const loader = document.getElementById('page-loader');
-      if (loader) {
+    const hackerLines = [
+      "Khởi động CV Nguyễn Minh Duy...",
+      "Tải module kỹ năng...",
+      "Kết nối GitHub: THÀNH CÔNG",
+      "Xác minh GreasyFork...",
+      "Xác thực terminal...",
+      "Gỡ giới hạn trình duyệt...",
+      "Đang dựng cấu trúc HTML...",
+      "Hoàn tất! Đang tải giao diện..."
+    ];
+
+    const loader = document.getElementById('hacker-loader');
+    let lineIndex = 0;
+
+    function typeLine() {
+      if (lineIndex < hackerLines.length) {
+        loader.innerHTML += "> " + hackerLines[lineIndex] + "\n";
+        loader.scrollTop = loader.scrollHeight;
+        lineIndex++;
+        setTimeout(typeLine, 300 + Math.random() * 300);
+      } else {
         loader.style.opacity = '0';
-        loader.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => loader.remove(), 500);
+        setTimeout(() => loader.remove(), 1000);
       }
+    }
+
+    window.addEventListener('load', () => {
+      typeLine();
     });
   </script>
 </body>
