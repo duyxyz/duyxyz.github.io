@@ -1,220 +1,548 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CV Nguyễn Minh Duy</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f2f4f8;
-      color: #1a1a1a;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio App - Trưng bày ứng dụng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-      max-width: 960px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    header {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
+        .explorer-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
 
-    header img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #00bcd4;
-    }
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            background-color: #f3f3f3;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+            z-index: 10;
+        }
 
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
-      color: #003147;
-    }
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
 
-    .contact-info-section {
-      background: #ffffff;
-      padding: 20px 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-    }
+        .menu-toggle {
+            display: none;
+            font-size: 1.2rem;
+        }
 
-    .contact-info div {
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
+        .address-bar {
+            flex-grow: 1;
+            margin: 0 0.5rem;
+        }
 
-    .contact-info a {
-      color: #0066cc;
-      text-decoration: none;
-    }
+        .address-bar input {
+            width: 100%;
+            padding: 0.4rem;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
 
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
+        .sidebar {
+            width: 250px;
+            background-color: #f9f9f9;
+            border-right: 1px solid #ccc;
+            padding: 0.5rem;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100vh;
+            transition: left 0.3s ease;
+            z-index: 20;
+        }
 
-    .section {
-      background: #ffffff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-    }
+        .sidebar.active {
+            left: 0;
+        }
 
-    .section h2 {
-      font-size: 1.6rem;
-      border-left: 5px solid #00bcd4;
-      padding-left: 12px;
-      margin-bottom: 20px;
-    }
+        .sidebar h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1rem;
+        }
 
-    ul {
-      padding-left: 20px;
-    }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    li {
-      margin-bottom: 12px;
-      line-height: 1.6;
-    }
+        .sidebar li {
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
 
-    p {
-      line-height: 1.7;
-    }
+        .sidebar li:hover {
+            background-color: #e0e0e0;
+        }
 
-    .footer {
-      text-align: center;
-      color: #777;
-      font-size: 0.9rem;
-      margin-top: 60px;
-      padding-top: 20px;
-      border-top: 1px solid #ccc;
-    }
+        .main-content {
+            flex-grow: 1;
+            padding: 0.5rem;
+            overflow-y: auto;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
 
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+        .main-content.shift {
+            margin-left: 250px;
+        }
 
-      header h1 {
-        font-size: 1.8rem;
-      }
+        .app-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
 
-      header img {
-        width: 80px;
-        height: 80px;
-      }
+        .app-item {
+            text-align: center;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            position: relative;
+        }
 
-      .section, .contact-info-section {
-        padding: 16px;
-      }
-    }
+        .app-item:hover {
+            background-color: #e6f3ff;
+        }
 
-    /* Hacker Loader Style */
-    #hacker-loader {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      color: #00ff00;
-      font-family: 'Courier New', monospace;
-      padding: 20px;
-      font-size: 16px;
-      line-height: 1.5;
-      z-index: 9999;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      transition: opacity 1s ease;
-    }
-  </style>
+        .app-item img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .app-item span {
+            display: block;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            word-break: break-all;
+        }
+
+        .app-item .app-desc {
+            display: none; /* Ẩn mặc định */
+            font-size: 0.65rem;
+            color: #555;
+            margin-top: 0.25rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 0.25rem;
+            border-radius: 3px;
+        }
+
+        .app-item:hover .app-desc {
+            display: block; /* Hiển thị khi hover */
+        }
+
+        .status-bar {
+            padding: 0.5rem;
+            background-color: #f3f3f3;
+            border-top: 1px solid #ccc;
+            font-size: 0.75rem;
+        }
+
+        /* Modal cho chi tiết ứng dụng */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 30;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            max-width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        .modal-content img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content h3 {
+            margin: 0.5rem 0;
+        }
+
+        .modal-content p {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .modal-content a {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #0078d4;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .modal-content .close-btn {
+            background: none;
+            color: #333;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Responsive cho điện thoại */
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -250px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: inline-block;
+            }
+
+            .nav-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .address-bar input {
+                font-size: 0.8rem;
+            }
+
+            .app-list {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+
+            .app-item img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .app-item span {
+                font-size: 0.65rem;
+            }
+
+            .app-item .app-desc {
+                font-size: 0.6rem;
+                display: none; /* Ẩn trên điện thoại mặc định */
+            }
+
+            .app-item:hover .app-desc {
+                display: block; /* Hiển thị khi hover trên điện thoại */
+            }
+
+            .modal-content {
+                max-width: 95%;
+            }
+
+            .modal-content img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Responsive cho máy tính bảng */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 200px;
+            }
+
+            .app-list {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            .modal-content {
+                max-width: 80%;
+            }
+        }
+
+        /* Responsive cho máy tính */
+        @media (min-width: 1025px) {
+            .sidebar {
+                width: 250px;
+                left: 0;
+                position: absolute;
+            }
+
+            .main-content {
+                margin-left: 260px;
+            }
+
+            .app-list {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .app-item img {
+                width: 64px;
+                height: 64px;
+            }
+
+            .app-item span {
+                font-size: 0.8rem;
+            }
+
+            .app-item .app-desc {
+                font-size: 0.7rem;
+            }
+
+            .modal-content {
+                max-width: 600px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="explorer-container">
+        
 
-  <!-- Hacker Loading Effect -->
-  <div id="hacker-loader"></div>
-
-  <div class="container">
-    <header>
-      <img src="https://avatars.githubusercontent.com/u/217141310?s=400&u=0a8c2c785b31a77a792f438339a32f0d3b267366&v=4" alt="Ảnh đại diện Nguyễn Minh Duy" />
-      <h1>Nguyễn Minh Duy</h1>
-    </header>
-
-    <section class="contact-info-section">
-      <div class="contact-info">
-        <div>Email: <a href="mailto:ngduy10102006@gmail.com">ngduy10102006@gmail.com</a></div>
-        <div>Điện thoại: <a href="tel:+84329200210">0329200210</a></div>
-        <div>Facebook:<br/><a href="https://www.facebook.com/S999999" target="_blank">https://www.facebook.com/S999999</a></div>
-        <div>GreasyFork:<br/><a href="https://greasyfork.org/users/1485109" target="_blank">https://greasyfork.org/users/1485109</a></div>
-        <div>SourceForge:<br/><a href="https://sourceforge.net/u/duy1nuis/" target="_blank">https://sourceforge.net/u/duy1nuis/</a></div>
-        <div>GitHub:<br/>
-          <a href="https://github.com/49F149159" target="_blank">https://github.com/49F149159</a> |
-          <a href="https://github.com/DuyNguyen2k6" target="_blank">https://github.com/DuyNguyen2k6</a>
+        <!-- Thanh sidebar (danh mục ứng dụng) -->
+        <div class="sidebar" id="sidebar">
+            <h3>Categories</h3>
+            <ul>
+                <li onclick="filterApps('all')"><i class="fas fa-star"></i> All Apps</li>
+                <li onclick="filterApps('extension')"><i class="fas fa-puzzle-piece"></i> Extensions</li>
+                <li onclick="filterApps('desktop')"><i class="fas fa-desktop"></i> Desktop Apps</li>
+            </ul>
         </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <h2>Tóm tắt bản thân</h2>
-      <p>
-        🤑🤓😭😄😱🥹😐🤔🤫🤨🧐
-      </p>
-    </section>
+        <!-- Khu vực hiển thị ứng dụng -->
+        <div class="main-content" id="main-content">
+            <div class="app-list" id="app-list">
+                <!-- Danh sách ứng dụng sẽ được thêm bằng JavaScript -->
+            </div>
+        </div>
 
-    <section class="section">
-      <h2>Kỹ năng nổi bật</h2>
-      <ul>
-        <li>Lập trình: Python, JavaScript, HTML/CSS</li>
-        <li>Quản lý dự án mã nguồn mở</li>
-        <li>Sử dụng Git và GitHub hiệu quả</li>
-        <li>Tự động hóa công việc bằng script (PowerShell, Bash)</li>
-        <li>Tham gia cộng đồng phát triển và đóng góp code</li>
-      </ul>
-    </section>
+        <!-- Thanh trạng thái -->
+        <div class="status-bar">
+            <span id="item-count">0 items</span>
+        </div>
 
-    <div class="footer">
-      © 2025 Nguyễn Minh Duy
+        <!-- Modal chi tiết ứng dụng -->
+        <div class="modal" id="app-modal">
+            <div class="modal-content">
+                <img id="modal-icon" src="" alt="App Icon">
+                <h3 id="modal-title"></h3>
+                <p id="modal-desc"></p>
+                <a id="modal-link" href="#" target="_blank">Visit App</a>
+                <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    const hackerLines = [
-      "Khởi động CV Nguyễn Minh Duy...",
-      "Tải module kỹ năng...",
-      "Kết nối GitHub: THÀNH CÔNG",
-      "Xác minh GreasyFork...",
-      "Xác thực terminal...",
-      "Gỡ giới hạn trình duyệt...",
-      "Đang dựng cấu trúc HTML...",
-      "Hoàn tất! Đang tải giao diện..."
-    ];
+    <script>
+        // Dữ liệu danh sách ứng dụng từ đoạn mã của bạn
+        const apps = [
+            {
+                name: "Highlight & Save",
+                type: "extension",
+                icon: "https://github.com/DuyNguyen2k6/highligh-save_Extension/blob/main/icon.png?raw=true",
+                description: "Tiện ích giúp bạn đánh dấu và lưu nội dung dễ dàng trên trình duyệt Chrome.",
+                link: "https://chromewebstore.google.com/detail/highlight-save/ijnojplolageohcdppaaaaffaphpmkio?utm_source=item-share-cb"
+            },
+            {
+                name: "HTML Quick Edit",
+                type: "extension",
+                icon: "https://lh3.googleusercontent.com/C_wHOEFII1MUq2D66jCpo1pvJIc8l-7cDL8JMrLfq0GCdlesEhh6ujSzhEhPuueRtZ5xLFmIkoTZnOQflj2CdIHM_Rw=s120",
+                description: "Chỉnh sửa nội dung trang web nhanh bằng chuột phải.",
+                link: "https://chromewebstore.google.com/detail/fkpebgagpomomfmobmjmpkgehjgnogfk?utm_source=item-share-cb"
+            },
+            {
+                name: "20-20-20 Eye Care Reminder",
+                type: "extension",
+                icon: "https://lh3.googleusercontent.com/n3x_UCx-6e739kLD7GagPFw7meDnWMNDaUS_oJFmCH8XNj0Jqz0Ok4M2pkLZnOE1SZsoBJO6PBGT8NTbIkdCsRyqmw=s120",
+                description: "Tiện ích nhắc nghỉ mắt theo quy tắc 20-20-20 giúp bảo vệ mắt khi làm việc máy tính lâu.",
+                link: "https://chromewebstore.google.com/detail/20-20-20-eye-care-reminde/indlfmlgdlapbagjahnalcfolfllgbhn?utm_source=item-share-cb"
+            },
+            {
+                name: "Birthday Countdown Multi",
+                type: "extension",
+                icon: "https://lh3.googleusercontent.com/KYhGi1gCvLtHRxCWRWEBSpR6ErZAM8iKxcJr144VZ6xSflJIJ3tRJ8eYEyaWLYMJzZy-tZzL_QvIE1ILlX4OMOURvR4=s120",
+                description: "Tiện ích đếm ngược đến ngày sinh nhật đa năng, hỗ trợ nhiều người và nhắc nhở kịp thời.",
+                link: "https://chromewebstore.google.com/detail/birthday-countdown-multi/kaecfkaiakhmjnehamfjgmkcohnbaoej?hl=vi&utm_source=ext_sidebar"
+            },
+            {
+                name: "YouTube-Progress-Bar-Customizer",
+                type: "extension",
+                icon: "https://raw.githubusercontent.com/DuyNguyen2k6/YouTube-Progress-Bar-Customizer/refs/heads/main/icon.png",
+                description: "Thay đổi thanh tiến trình YouTube.",
+                link: "https://github.com/DuyNguyen2k6/YouTube-Progress-Bar-Customizer"
+            },
+            {
+                name: "YT-MP3",
+                type: "extension",
+                icon: "https://github.com/DuyNguyen2k6/YT-MP3/blob/main/icon128.png?raw=true",
+                description: "Tải MP3 từ YouTube.",
+                link: "https://github.com/DuyNguyen2k6/YT-MP3"
+            },
+            {
+                name: "SaveNOTE",
+                type: "extension",
+                icon: "https://github.com/DuyNguyen2k6/SaveNOTE_Extension/blob/main/icon.png?raw=true",
+                description: "Ghi chú nhanh văn bản và hình ảnh trên trình duyệt.",
+                link: "https://github.com/DuyNguyen2k6/SaveNOTE_Extension"
+            },
+            {
+                name: "YT Premium Logo",
+                type: "extension",
+                icon: "https://github.com/DuyNguyen2k6/YT-Prenium-Logo/blob/main/Logo_P_red_bg_white_P.png?raw=true",
+                description: "Thay đổi logo YouTube thành Premium.",
+                link: "https://github.com/DuyNguyen2k6/YT-Prenium-Logo"
+            },
+            {
+                name: "PyDeploy_App",
+                type: "desktop",
+                icon: "https://github.com/DuyNguyen2k6/PyDeploy_App/raw/main/app_icon.png",
+                description: "Ứng dụng deploy code Python dễ dàng, tự động hóa các bước phức tạp.",
+                link: "https://github.com/DuyNguyen2k6/PyDeploy_App"
+            },
+            {
+                name: "ADB-App-Remover",
+                type: "desktop",
+                icon: "https://github.com/DuyNguyen2k6/ADB-App-Remover/raw/main/ADB-App-Remover.png",
+                description: "Công cụ gỡ ứng dụng Android bằng ADB, tiện lợi cho việc quản lý thiết bị.",
+                link: "https://github.com/DuyNguyen2k6/ADB-App-Remover"
+            },
+            {
+                name: "AutoMessenger_App",
+                type: "desktop",
+                icon: "https://raw.githubusercontent.com/DuyNguyen2k6/AutoMessenger_App/refs/heads/main/ICON%20AUTO%20MESS.ico",
+                description: "Ứng dụng tự động gửi tin nhắn theo lịch trình, hỗ trợ nhiều nền tảng mạng xã hội.",
+                link: "https://github.com/DuyNguyen2k6/AutoMessenger_App"
+            },
+            {
+                name: "Shutdown-timer_V2_App",
+                type: "desktop",
+                icon: "https://raw.githubusercontent.com/DuyNguyen2k6/Shutdown-timer_V2_App/refs/heads/main/app_icon.ico",
+                description: "Ứng dụng Windows hẹn giờ tắt máy dễ thương cute.",
+                link: "https://github.com/DuyNguyen2k6/Shutdown-timer_V2_App"
+            },
+            {
+                name: "GIF-Overlay",
+                type: "desktop",
+                icon: "https://github.com/DuyNguyen2k6/GIF-Overlay/raw/main/icon.png",
+                description: "Ứng dụng hiển thị ảnh GIF nổi trên màn hình với nhiều tùy chọn điều chỉnh tiện lợi.",
+                link: "https://github.com/DuyNguyen2k6/GIF-Overlay"
+            }
+        ];
 
-    const loader = document.getElementById('hacker-loader');
-    let lineIndex = 0;
+        // Hiển thị danh sách ứng dụng
+        function renderAppList(filteredApps) {
+            const appList = document.getElementById('app-list');
+            appList.innerHTML = '';
+            filteredApps.forEach(app => {
+                const appItem = document.createElement('div');
+                appItem.className = 'app-item';
+                appItem.innerHTML = `
+                    <img src="${app.icon}" alt="${app.name}">
+                    <span>${app.name}</span>
+                    <div class="app-desc">${app.description}</div>
+                `;
+                appItem.addEventListener('click', () => {
+                    openModal(app);
+                });
+                appList.appendChild(appItem);
+            });
+            document.getElementById('item-count').textContent = `${filteredApps.length} items`;
+        }
 
-    function typeLine() {
-      if (lineIndex < hackerLines.length) {
-        loader.innerHTML += "> " + hackerLines[lineIndex] + "\n";
-        loader.scrollTop = loader.scrollHeight;
-        lineIndex++;
-        setTimeout(typeLine, 300 + Math.random() * 300);
-      } else {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 1000);
-      }
-    }
+        // Lọc ứng dụng theo danh mục
+        function filterApps(category) {
+            if (category === 'all') {
+                renderAppList(apps);
+            } else {
+                const filtered = apps.filter(app => app.type === category);
+                renderAppList(filtered);
+            }
+            closeSidebarOnMobile();
+        }
 
-    window.addEventListener('load', () => {
-      typeLine();
-    });
-  </script>
+        // Mở modal chi tiết ứng dụng
+        function openModal(app) {
+            const modal = document.getElementById('app-modal');
+            document.getElementById('modal-icon').src = app.icon;
+            document.getElementById('modal-title').textContent = app.name;
+            document.getElementById('modal-desc').textContent = app.description;
+            document.getElementById('modal-link').href = app.link;
+            modal.style.display = 'flex';
+        }
+
+        // Đóng modal
+        function closeModal() {
+            document.getElementById('app-modal').style.display = 'none';
+        }
+
+        // Toggle sidebar trên điện thoại
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            sidebar.classList.toggle('active');
+            mainContent.classList.toggle('shift');
+        }
+
+        // Đóng sidebar trên điện thoại sau khi chọn danh mục
+        function closeSidebarOnMobile() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const mainContent = document.getElementById('main-content');
+                sidebar.classList.remove('active');
+                mainContent.classList.remove('shift');
+            }
+        }
+
+        // Khởi tạo
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAppList(apps);
+        });
+    </script>
 </body>
 </html>
