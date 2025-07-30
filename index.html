@@ -120,7 +120,7 @@
       }
     }
 
-    /* Quick nav */
+    /* Quick nav popup */
     #quick-nav {
       position: fixed;
       top: 20%;
@@ -146,7 +146,7 @@
 </head>
 <body>
 
-  <!-- Bảng nhập điều hướng -->
+  <!-- Ô nhập điều hướng -->
   <div id="quick-nav">
     <input type="text" id="nav-input" placeholder="Nhập từ khoá..." />
   </div>
@@ -185,13 +185,15 @@
   </div>
 
   <script>
-    // Tính năng nhấn ` để nhập từ khoá
     const quickNav = document.getElementById('quick-nav');
     const navInput = document.getElementById('nav-input');
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === '`') {
-        e.preventDefault();
+      const isInputFocused = document.activeElement === navInput;
+
+      // Nhấn ` khi chưa trong ô input
+      if (e.key === '`' && !isInputFocused) {
+        e.preventDefault(); // Ngăn không nhập ký tự `
         quickNav.style.display = 'block';
         navInput.value = '';
         navInput.focus();
@@ -210,6 +212,7 @@
       }
     });
 
+    // Click ra ngoài thì ẩn
     document.addEventListener('click', (e) => {
       if (!quickNav.contains(e.target) && e.target !== navInput) {
         quickNav.style.display = 'none';
