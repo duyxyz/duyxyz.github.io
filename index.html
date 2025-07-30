@@ -119,9 +119,37 @@
         padding: 16px;
       }
     }
+
+    /* Quick nav */
+    #quick-nav {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 20px;
+      border-radius: 12px;
+      display: none;
+      z-index: 9999;
+    }
+
+    #nav-input {
+      padding: 10px 16px;
+      font-size: 1.1rem;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Bảng nhập điều hướng -->
+  <div id="quick-nav">
+    <input type="text" id="nav-input" placeholder="Nhập từ khoá..." />
+  </div>
 
   <div class="container">
     <header>
@@ -136,7 +164,7 @@
         <div>Facebook:<br/><a href="https://www.facebook.com/S999999" target="_blank">facebook.com/S999999</a></div>
         <div>GreasyFork:<br/><a href="https://greasyfork.org/users/1485109" target="_blank">greasyfork.org/users/1485109</a></div>
         <div>SourceForge:<br/><a href="https://sourceforge.net/u/duy1nuis/" target="_blank">sourceforge.net/u/duy1nuis/</a></div>
-		<div>Kho Apps:<br/><a href="https://49f149159.github.io/app" target="_blank">49f149159.github.io/app</a></div>
+        <div>Kho Apps:<br/><a href="https://49f149159.github.io/app" target="_blank">49f149159.github.io/app</a></div>
         <div>GitHub:<br/>
           <a href="https://github.com/49F149159" target="_blank">49F149159</a> |
           <a href="https://github.com/DuyNguyen2k6" target="_blank">DuyNguyen2k6</a>
@@ -151,42 +179,41 @@
       </p>
     </section>
 
-    
-
     <div class="footer">
       © 2025 Nguyễn Minh Duy
     </div>
   </div>
 
   <script>
-    const hackerLines = [
-      "Khởi động CV Nguyễn Minh Duy...",
-      "Tải module kỹ năng...",
-      "Kết nối GitHub: THÀNH CÔNG",
-      "Xác minh GreasyFork...",
-      "Xác thực terminal...",
-      "Gỡ giới hạn trình duyệt...",
-      "Đang dựng cấu trúc HTML...",
-      "Hoàn tất! Đang tải giao diện..."
-    ];
+    // Tính năng nhấn ` để nhập từ khoá
+    const quickNav = document.getElementById('quick-nav');
+    const navInput = document.getElementById('nav-input');
 
-    const loader = document.getElementById('hacker-loader');
-    let lineIndex = 0;
-
-    function typeLine() {
-      if (lineIndex < hackerLines.length) {
-        loader.innerHTML += "> " + hackerLines[lineIndex] + "\n";
-        loader.scrollTop = loader.scrollHeight;
-        lineIndex++;
-        setTimeout(typeLine, 300 + Math.random() * 300);
-      } else {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 1000);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '`') {
+        e.preventDefault();
+        quickNav.style.display = 'block';
+        navInput.value = '';
+        navInput.focus();
+      } else if (e.key === 'Escape') {
+        quickNav.style.display = 'none';
       }
-    }
+    });
 
-    window.addEventListener('load', () => {
-      typeLine();
+    navInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const keyword = navInput.value.trim();
+        if (keyword) {
+          const url = `https://49f149159.github.io/${encodeURIComponent(keyword)}`;
+          window.location.href = url;
+        }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!quickNav.contains(e.target) && e.target !== navInput) {
+        quickNav.style.display = 'none';
+      }
     });
   </script>
 </body>
