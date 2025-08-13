@@ -1,1 +1,169 @@
-<html><head><meta content="text/html; charset=UTF-8" http-equiv="content-type"></head><body class="doc-content" style="background-color:#ffffff;max-width:451.4pt;padding:72pt 72pt 72pt 72pt"><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="text-decoration-skip-ink:none;-webkit-text-decoration-skip:none;color:#1155cc;text-decoration:underline"><a href="mailto:haileovan46@gmail.com" style="color:inherit;text-decoration:inherit">haileovan46@gmail.com</a></span><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:&quot;Arial&quot;;font-style:normal">&nbsp;</span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:&quot;Arial&quot;;font-style:normal">Duy@10102006</span></p></body></html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Copy Nội Dung - Rain Effect Even Speed</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #121212;
+        color: #f1f1f1;
+        gap: 15px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Canvas mưa chữ */
+    #rainCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Ô nội dung và nút */
+    .text, .link-btn {
+        position: relative;
+        z-index: 1;
+        width: 90%;
+        max-width: 400px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        user-select: none;
+    }
+    .text {
+        background: #2a2a2a;
+        color: #ffffff;
+        word-break: break-all;
+    }
+    .text:hover {
+        border-color: #00e1ff;
+        box-shadow: 0 0 10px #00e1ff;
+        background: linear-gradient(145deg, #2e2e2e, #252525);
+    }
+    .text.copied {
+        border-color: #28a745;
+        box-shadow: 0 0 15px #28a745;
+        background: linear-gradient(145deg, #2d3e2d, #253725);
+        transform: scale(1.02);
+    }
+    .link-btn {
+        background: linear-gradient(270deg, #ff9800, #ff5722, #ffcc00);
+        background-size: 300% 300%;
+        color: white;
+        border: none;
+        animation: gradientMove 5s ease infinite;
+    }
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .link-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #ff9800;
+    }
+</style>
+</head>
+<body>
+
+<!-- Canvas mưa chữ -->
+<canvas id="rainCanvas"></canvas>
+
+<div class="text" id="email" onclick="copyText(event, 'email')">haileovan46@gmail.com</div>
+<div class="text" id="password" onclick="copyText(event, 'password')">Duy@10102006</div>
+
+<div class="link-btn" onclick="window.open('https://www.rophim.me/phimhay', '_blank')">
+     Chuyển đến Rổ Phim
+</div>
+
+<script>
+function copyText(e, id) {
+    let el = document.getElementById(id);
+    let text = el.textContent;
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            animateCopied(el);
+        }).catch(() => {
+            fallbackCopy(text, el);
+        });
+    } else {
+        fallbackCopy(text, el);
+    }
+}
+
+function fallbackCopy(text, el) {
+    let tempInput = document.createElement("textarea");
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    animateCopied(el);
+}
+
+function animateCopied(el) {
+    el.classList.add("copied");
+    setTimeout(() => {
+        el.classList.remove("copied");
+    }, 700);
+}
+
+/* Mưa chữ Rổ Phim - tốc độ đều và không đè lên nhau */
+const canvas = document.getElementById("rainCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const text = "Rổ Phim";
+const fontSize = 24;
+const columns = Math.floor(canvas.width / (ctx.measureText(text).width + 20)); // số cột cố định
+const drops = [];
+
+for (let i = 0; i < columns; i++) {
+    drops[i] = Math.random() * canvas.height - canvas.height; // vị trí y ban đầu khác nhau
+}
+
+function drawRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = `${fontSize}px Arial`;
+
+    for (let i = 0; i < drops.length; i++) {
+        const x = i * (ctx.measureText(text).width + 20);
+        ctx.fillText(text, x, drops[i]);
+
+        drops[i] += 2; // tốc độ rơi giống nhau
+        if (drops[i] > canvas.height) {
+            drops[i] = -fontSize; // reset lại từ trên xuống
+        }
+    }
+
+    requestAnimationFrame(drawRain);
+}
+
+drawRain();
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
