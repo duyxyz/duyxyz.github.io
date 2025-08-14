@@ -9,8 +9,6 @@
     --bg-main: #121212;
     --bg-card: rgba(255,255,255,0.05);
     --text-color: #f0f0f0;
-    --accent: #ff9800;
-    --accent-hover: #e68900;
   }
   body {
     font-family: Arial, sans-serif;
@@ -58,19 +56,27 @@
     -webkit-appearance: none;
     -moz-appearance: none;
   }
-  select {
-    cursor: pointer;
-  }
+  select { cursor: pointer; }
+
+  /* 🔹 Nút RGB Gradient chậm */
   button {
-    background: var(--accent);
+    background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet);
+    background-size: 1400% 1400%;
+    animation: rgbflow 20s ease infinite;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    border: none;
+    text-transform: uppercase;
+    transition: transform 0.2s;
   }
-  button:hover {
-    background: var(--accent-hover);
+  button:hover { transform: scale(1.05); }
+  @keyframes rgbflow {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
   }
+
   .guide {
     background: rgba(255,255,255,0.05);
     padding: 10px;
@@ -82,7 +88,7 @@
 </style>
 </head>
 <body>
-  <h1>🕒 Hẹn Giờ Tắt/Ngủ/Khởi Động Lại</h1>
+  <h1>🕒 Hẹn Giờ Tắt / Ngủ / Khởi Động Lại</h1>
   <div class="container">
     <label>📅 Chế độ hẹn giờ:</label>
     <select id="mode" onchange="toggleTimeInputs()">
@@ -107,14 +113,14 @@
       <option value="sleep">Ngủ</option>
     </select>
 
-    <button onclick="createBat()">📥 Tạo file BAT</button>
+    <button onclick="createBat()">Tạo file BAT</button>
 
     <div class="guide">
       <b>📌 Hướng dẫn:</b><br>
       1. Chọn chế độ & thời gian.<br>
       2. Chọn hành động.<br>
       3. Nhấn "Tạo file BAT" để tải.<br>
-      4. Mở file, sẽ hiện đếm ngược và thực hiện lệnh.<br>
+      4. Mở file → sẽ hiện đếm ngược với khung đẹp.<br>
       5. Nhấn CTRL+C để hủy.<br>
     </div>
   </div>
@@ -149,23 +155,25 @@ function createBat(){
   let seconds = minutes * 60;
   let action = document.getElementById('action').value;
 
+  // Nội dung file BAT tiếng Anh + countdown khung đẹp
   let cmd = 
 `@echo off
+setlocal enabledelayedexpansion
 set /a timeleft=${seconds}
-cls
-color 0A
-title HẸN GIỜ ${action.toUpperCase()} WINDOWS
-echo ==============================
-echo     HẸN GIỜ ${action.toUpperCase()} WINDOWS
-echo ==============================
-echo Sẽ ${action === 'shutdown' ? 'tắt máy' : action === 'restart' ? 'khởi động lại' : 'ngủ'} sau %timeleft% giây...
-echo Nhấn CTRL+C để hủy.
-echo ==============================
+color 0E
+title ${action.toUpperCase()} TIMER
+echo Press CTRL+C to cancel.
 :loop
-if %timeleft% LEQ 0 goto doAction
-echo Còn %timeleft% giây...
+if !timeleft! LEQ 0 goto doAction
+cls
+echo ╔══════════════════════════════════════╗
+echo ║                                      ║
+set /a spaces=(30 - (len=!timeleft!) * 1) / 2
+echo ║       ${action.toUpperCase()} IN !timeleft! SECONDS       ║
+echo ║                                      ║
+echo ╚══════════════════════════════════════╝
 timeout /t 1 >nul
-set /a timeleft=%timeleft%-1
+set /a timeleft=!timeleft!-1
 goto loop
 :doAction
 `;
@@ -177,7 +185,7 @@ goto loop
   let blob = new Blob([cmd], {type: "text/plain"});
   let link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "hen-gio.bat";
+  link.download = "timer.bat";
   link.click();
 }
 </script>
