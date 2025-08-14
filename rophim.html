@@ -2,24 +2,45 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Copy Nội Dung</title>
+<title>Login + Watermark Lưới</title>
 <style>
   body {
     margin: 0;
     font-family: Arial, sans-serif;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    min-height: 100vh; gap: 25px;
-    color: #f1f1f1;
     background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
   }
 
-  /* Logo chính - chỉ nhịp tim khi hover */
+  #bgCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .login-box {
+    position: relative;
+    z-index: 1;
+    background: #1e1e1e;
+    padding: 40px 35px; /* to hơn */
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 500px; /* rộng hơn */
+    text-align: center;
+    box-sizing: border-box;
+  }
+
   .main-logo {
-    width: 260px;
-    height: auto;
-    user-select: none;
+    width: 150px; /* logo to hơn */
+    margin-bottom: 35px;
     cursor: pointer;
-    margin-bottom: 25px;
     transition: transform 0.3s ease;
   }
   .main-logo:hover {
@@ -32,41 +53,52 @@
     75% { transform: scale(1.05); }
   }
 
-  /* Ô nội dung */
   .text {
-    width: 90%; max-width: 400px;
-    padding: 14px 16px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 16px; /* đồng nhất kích thước chữ */
-    text-align: center;
-    user-select: none;
-    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: 18px; /* nút cao hơn */
+    margin-bottom: 20px;
+    font-size: 18px; /* chữ to hơn */
+    border: none;
+    border-radius: 8px;
     background: #2a2a2a;
     color: #fff;
-    word-break: break-all;
+    text-align: center;
+    cursor: pointer;
     transition: background 0.25s ease;
+    box-sizing: border-box;
   }
   .text:hover {
-    background: linear-gradient(145deg, #2e2e2e, #252525);
+    background: #333;
   }
 
   @media (max-width: 480px) {
-    body { gap: 20px; }
-    .text { font-size: 14px; padding: 10px; }
-    .main-logo { width: 200px; margin-bottom: 20px; }
+    .login-box {
+      max-width: 90%; /* gần full màn hình trên điện thoại */
+      padding: 30px 20px;
+    }
+    .main-logo {
+      width: 70%;
+      max-width: 220px;
+    }
+    .text {
+      font-size: 20px;
+      padding: 20px;
+    }
   }
 </style>
 </head>
 <body>
 
-<!-- Logo chính -->
-<img src="https://www.rophim.me/images/logo_rox.svg" alt="Logo" class="main-logo"
-     onclick="window.open('https://www.rophim.me/phimhay', '_blank')">
+<canvas id="bgCanvas"></canvas>
 
-<!-- Nút copy -->
-<div class="text" id="email" onclick="copyText('email')">haileovan46@gmail.com</div>
-<div class="text" id="password" onclick="copyText('password')">Duy@10102006</div>
+<div class="login-box">
+  <img src="https://www.rophim.me/images/logo_rox.svg" alt="Logo"
+       class="main-logo" onclick="window.open('https://www.rophim.me/phimhay', '_blank')">
+
+  <div class="text" id="email" onclick="copyText('email')">haileovan46@gmail.com</div>
+  <div class="text" id="password" onclick="copyText('password')">Duy@10102006</div>
+</div>
 
 <script>
 function copyText(id) {
@@ -95,6 +127,50 @@ function copyText(id) {
     setTimeout(() => { el.textContent = originalText; }, 1000);
   }
 }
+
+// ===== Nền chữ dạng lưới =====
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+
+let grid = [];
+let spacingX = 200;
+let spacingY = 100;
+let offset = 0;
+let speed = 0.3;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  grid = [];
+
+  for (let y = 0; y < canvas.height + spacingY; y += spacingY) {
+    for (let x = 0; x < canvas.width + spacingX; x += spacingX) {
+      grid.push({
+        x: x,
+        y: y,
+        alpha: 0.05
+      });
+    }
+  }
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "20px Arial";
+  ctx.fillStyle = "rgba(255,255,255,0.05)";
+
+  grid.forEach(cell => {
+    ctx.fillText("Rổ Phim", cell.x + offset, cell.y);
+  });
+
+  offset += speed;
+  if (offset > spacingX) offset = 0;
+
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
