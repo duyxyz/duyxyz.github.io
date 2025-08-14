@@ -121,7 +121,7 @@
       1. Chọn chế độ & thời gian.<br>
       2. Chọn hành động.<br>
       3. Nhấn "Tạo file BAT" để tải.<br>
-      4. Mở file → sẽ hiện đếm ngược đơn giản.<br>
+      4. Mở file → sẽ hiện countdown xuống dòng.<br>
       5. Nhấn CTRL+C để hủy.<br>
     </div>
   </div>
@@ -156,22 +156,21 @@ function createBat(){
   let seconds = minutes * 60;
   let action = document.getElementById('action').value;
 
-  // File BAT đơn giản, không màu mè
+  // File BAT xuống dòng mỗi giây
   let cmd = 
 `@echo off
 setlocal enabledelayedexpansion
 set /a timeleft=${seconds}
 title ${action.toUpperCase()} TIMER
 echo Press CTRL+C to cancel.
+
 :loop
 if !timeleft! LEQ 0 goto doAction
-cls
-echo ==============================
-echo     ${action.toUpperCase()} IN !timeleft! SECONDS
-echo ==============================
+echo !timeleft!
 timeout /t 1 >nul
-set /a timeleft=!timeleft!-1
+set /a timeleft-=1
 goto loop
+
 :doAction
 `;
 
