@@ -5,134 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Duy Portfolio</title>
 <style>
+  :root { --fg:#fff; --fg-dim:#ccc; --bg:#000; }
   body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
-    color: #fff;
-    background: #000;
-    text-align: center;
-    overflow-x: hidden;
+    margin: 0; padding: 0;
+    font-family: 'Inter','Segoe UI',Tahoma,sans-serif;
+    color: var(--fg); background: var(--bg);
+    text-align: center; overflow-x: hidden;
   }
-  #space-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-  }
+  #space-bg { position: fixed; inset: 0; z-index: -1; display:block; }
+  .container { max-width: 800px; margin: auto; padding: 20px; }
   header {
     margin-bottom: 20px;
-  }
-  header img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #fff;
-    margin-bottom: 12px;
-    cursor: pointer;
-  }
-  header h1 {
-    font-size: 1.8rem;
-    margin: 0;
-    color: #fff;
-  }
-  .search-box {
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid #fff;
-    border-radius: 25px;
-    padding: 8px 12px;
-    width: 100%;
-    max-width: 320px;
-    margin: 20px auto;
-  }
-  .search-box svg {
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    stroke: #fff;
-  }
-  .search-box input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: #fff;
-    font-size: 1rem;
-    padding-left: 8px;
-  }
-  .contact-info {
-    margin: 20px 0;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .contact-info.show {
-    display: block;
-    opacity: 1;
-  }
-  .contact-info div {
-    margin-bottom: 10px;
-  }
-  .contact-info a {
-    color: #fff;
-    text-decoration: none;
-  }
-  .contact-info a:hover {
-    text-decoration: underline;
-  }
-  .footer-buttons {
-    display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
+    gap: 15px;
   }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 8px 14px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.25s ease-in-out;
-    text-decoration: none;
-    font-size: 0.95rem;
+  header img{
+    width:90px;height:90px;border-radius:50%;object-fit:cover;
+    border:2px solid var(--fg);cursor:pointer;
+    transition: transform .25s ease;
   }
-  .btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
+  header img:hover{ transform: scale(1.03); }
+  header h1{ font-size:1.8rem;margin:0;color:var(--fg); }
+  .search-box{
+    display:flex;align-items:center;background:rgba(0,0,0,.5);
+    border:1px solid var(--fg);border-radius:25px;padding:8px 12px;
+    width:100%;max-width:320px;margin:20px auto;
   }
-  @media (max-width: 600px) {
-    header img {
-      width: 75px;
-      height: 75px;
-    }
-    header h1 {
-      font-size: 1.4rem;
-    }
-    .search-box {
-      max-width: 260px;
-    }
-    .search-box input {
-      font-size: 0.95rem;
-    }
-    .btn {
-      padding: 7px 12px;
-      font-size: 0.9rem;
-    }
+  .search-box svg{ flex-shrink:0;width:18px;height:18px;stroke:var(--fg); }
+  .search-box input{
+    flex:1;border:none;outline:none;background:transparent;color:var(--fg);
+    font-size:1rem;padding-left:8px;
+  }
+  .contact-info{ margin:20px 0; display:none; opacity:0; transition:opacity .4s ease; }
+  .contact-info.show{ display:block; opacity:1; }
+  .contact-info div{ margin-bottom:10px; }
+  .contact-info a{ color:var(--fg); text-decoration:none; }
+  .contact-info a:hover{ text-decoration:underline; }
+  .footer-buttons{
+    display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;background:transparent;
+    border:1px solid var(--fg);color:var(--fg);padding:8px 14px;border-radius:25px;
+    cursor:pointer;transition:all .25s ease-in-out;text-decoration:none;font-size:.95rem;
+  }
+  .btn:hover{ background:rgba(255,255,255,.15); transform: translateY(-2px); }
+  #datetime{ margin-top:20px;font-size:1rem;color:var(--fg-dim); }
+  @media (max-width:600px){
+    header img{ width:75px;height:75px; }
+    header h1{ font-size:1.4rem; }
+    .search-box{ max-width:260px; }
+    .search-box input{ font-size:.95rem; }
+    .btn{ padding:7px 12px; font-size:.9rem; }
   }
 </style>
 </head>
@@ -143,7 +69,6 @@
     <img src="https://avatars.githubusercontent.com/u/217141310?s=400&v=4" alt="Avatar" id="avatar" />
     <h1>Nguyễn Minh Duy</h1>
   </header>
-
   <div class="search-box">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="7" stroke-width="2"/>
@@ -151,7 +76,6 @@
     </svg>
     <input type="text" id="nav-input" placeholder="Enter keyword and press Enter..." />
   </div>
-
   <div class="contact-info" id="contact">
     <div><a href="mailto:ngduy10102006@gmail.com">Mail</a></div>
     <div><a href="tel:+84329200210">Phone</a></div>
@@ -160,79 +84,103 @@
     <div><a href="https://sourceforge.net/u/duy1nuis/" target="_blank">SourceForge</a></div>
     <div><a href="https://duyxyz.github.io/app" target="_blank">App Store</a></div>
   </div>
-
   <div class="footer-buttons">
-    <a href="https://github.com/duyxyz" target="_blank" class="btn" title="GitHub">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
-        <path d="M12 .5C5.37.5 0 5.87 0 12.46c0 5.28 3.438 9.747 8.205 11.322.6.113.82-.263.82-.583 0-.288-.011-1.048-.017-2.056-3.338.74-4.042-1.61-4.042-1.61-.546-1.4-1.333-1.774-1.333-1.774-1.09-.767.082-.752.082-.752 1.205.085 1.838 1.264 1.838 1.264 1.07 1.873 2.809 1.332 3.492 1.019.108-.794.418-1.332.762-1.638-2.665-.31-5.467-1.37-5.467-6.09 0-1.346.465-2.446 1.235-3.307-.124-.31-.535-1.556.117-3.244 0 0 1.008-.33 3.3 1.26a11.273 11.273 0 0 1 3.003-.414c1.02.005 2.046.14 3.003.414 2.29-1.59 3.296-1.26 3.296-1.26.654 1.688.243 2.934.12 3.244.772.861 1.232 1.961 1.232 3.307 0 4.73-2.807 5.776-5.479 6.082.43.372.814 1.103.814 2.222 0 1.605-.015 2.898-.015 3.293 0 .323.216.701.825.582C20.565 22.204 24 17.737 24 12.46 24 5.87 18.627.5 12 .5z"/>
-      </svg> GitHub
-    </a>
-    <a href="https://duyxyz.github.io/bank" target="_blank" class="btn" title="Buy me a coffee">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
-        <path d="M18 3h-14v10c0 3.31 2.69 6 6 6h2c3.31 0 6-2.69 6-6v-1h2a3 3 0 0 0 0-6h-2v-3zm0 5h2a1 1 0 0 1 0 2h-2v-2z"/>
-      </svg> Buy me a coffee
-    </a>
+    <a href="https://github.com/duyxyz" target="_blank" class="btn">GitHub</a>
+    <a href="https://duyxyz.github.io/bank" target="_blank" class="btn">Buy me a coffee</a>
   </div>
+  <div id="datetime"></div>
 </div>
-
 <script>
+  // Navigation
   document.getElementById('nav-input').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const keyword = e.target.value.trim();
-      if (keyword) {
-        window.location.href = `https://duyxyz.github.io/${encodeURIComponent(keyword)}`;
-      }
+      if (keyword) window.location.href = `https://duyxyz.github.io/${encodeURIComponent(keyword)}`;
     }
   });
-
-  // Toggle contact info
-  const avatar = document.getElementById('avatar');
-  const contact = document.getElementById('contact');
-  avatar.addEventListener('click', () => {
-    contact.classList.toggle('show');
+  // Toggle contact
+  document.getElementById('avatar').addEventListener('click', () => {
+    document.getElementById('contact').classList.toggle('show');
   });
-
-  // Space background
+  // Canvas setup
   const canvas = document.getElementById('space-bg');
   const ctx = canvas.getContext('2d');
-  let stars = [];
-  function resizeCanvas() {
+  let stars = [], meteors = [];
+  function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    createStars(Math.min(300, Math.floor(canvas.width * canvas.height / 5000)));
   }
   window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  function createStars(count) {
-    stars = [];
-    for (let i = 0; i < count; i++) {
+  // Create stars
+  function createStars(count){
+    stars.length = 0;
+    for(let i=0;i<count;i++){
       stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5,
-        alpha: Math.random(),
-        speed: Math.random() * 0.2
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.5 + 0.2,
+        a: Math.random()*0.9 + 0.1,
+        vy: Math.random()*0.3 + 0.05
       });
     }
   }
-  function drawStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#fff";
-    stars.forEach(s => {
-      ctx.globalAlpha = s.alpha;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-      ctx.fill();
-      s.y += s.speed;
-      if (s.y > canvas.height) s.y = 0;
+  // Create meteor
+  function spawnMeteor(){
+    const side = Math.random() < 0.5 ? 'left' : 'right';
+    const y = Math.random() * canvas.height * 0.5;
+    const length = Math.random() * 80 + 50;
+    const speed = Math.random() * 4 + 3;
+    meteors.push({
+      x: side === 'left' ? -length : canvas.width + length,
+      y,
+      len: length,
+      speedX: side === 'left' ? speed : -speed,
+      speedY: speed * 0.5,
+      alpha: 1
     });
+  }
+  setInterval(spawnMeteor, 1500);
+  // Draw loop
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    // Stars
+    for(const s of stars){
+      s.y += s.vy;
+      if(s.y - s.r > canvas.height){ s.y = -s.r; s.x = Math.random()*canvas.width; }
+      ctx.globalAlpha = s.a;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = "#fff";
+      ctx.fill();
+    }
     ctx.globalAlpha = 1;
+    // Meteors
+    for(const m of meteors){
+      m.x += m.speedX;
+      m.y += m.speedY;
+      m.alpha *= 0.97;
+      ctx.strokeStyle = `rgba(255,200,100,${m.alpha})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(m.x, m.y);
+      ctx.lineTo(m.x - m.speedX * 5, m.y - m.speedY * 5);
+      ctx.stroke();
+    }
+    meteors = meteors.filter(m => m.alpha > 0.05);
+    requestAnimationFrame(draw);
   }
-  createStars(200);
-  function animate() {
-    drawStars();
-    requestAnimationFrame(animate);
+  resizeCanvas();
+  draw();
+  // Date-time update
+  function updateDateTime(){
+    const now = new Date();
+    const daysVN = ["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
+    document.getElementById("datetime").textContent =
+      `${daysVN[now.getDay()]}, ${now.toLocaleDateString("vi-VN")} - ${now.toLocaleTimeString("vi-VN")}`;
   }
-  animate();
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
 </script>
 </body>
 </html>
