@@ -1,185 +1,238 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CV Nguyễn Minh Duy</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f2f4f8;
-      color: #1a1a1a;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Duy Portfolio</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    color: #fff;
+    background: #000;
+    text-align: center;
+    overflow-x: hidden;
+  }
+  #space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  header {
+    margin-bottom: 20px;
+  }
+  header img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #fff;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #fff;
+    border-radius: 25px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 320px;
+    margin: 20px auto;
+  }
+  .search-box svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    stroke: #fff;
+  }
+  .search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 1rem;
+    padding-left: 8px;
+  }
+  .contact-info {
+    margin: 20px 0;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .contact-info.show {
+    display: block;
+    opacity: 1;
+  }
+  .contact-info div {
+    margin-bottom: 10px;
+  }
+  .contact-info a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  .footer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  @media (max-width: 600px) {
     header img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #00bcd4;
+      width: 75px;
+      height: 75px;
     }
-
     header h1 {
-      font-size: 2rem;
-      margin: 0;
-      color: #003147;
+      font-size: 1.4rem;
     }
-
-    /* Ô nhập điều hướng đẹp hơn */
-    #quick-nav {
-      margin-bottom: 20px;
-    }
-
     .search-box {
-      position: relative;
-      width: 100%;
+      max-width: 260px;
     }
-
     .search-box input {
-      padding: 10px 14px 10px 38px; /* chừa chỗ cho icon */
-      font-size: 1rem;
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 25px;
-      outline: none;
-      transition: all 0.2s ease-in-out;
-      box-sizing: border-box;
-      background-color: white;
-    }
-
-    .search-box input:focus {
-      border-color: #00bcd4;
-      box-shadow: 0 0 5px rgba(0,188,212,0.4);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 16px;
-      height: 16px;
-      fill: #777;
-      pointer-events: none;
-    }
-
-    .contact-info-section {
-      background: #ffffff;
-      padding: 16px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      border: 1px solid #ddd;
-    }
-
-    .contact-info div {
-      margin-bottom: 8px;
       font-size: 0.95rem;
     }
-
-    .contact-info a {
-      color: #0066cc;
-      text-decoration: none;
+    .btn {
+      padding: 7px 12px;
+      font-size: 0.9rem;
     }
-
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-
-    .footer {
-      text-align: center;
-      color: #777;
-      font-size: 0.85rem;
-      margin-top: 30px;
-      padding-top: 15px;
-      border-top: 1px solid #ccc;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 10px;
-      }
-      header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      header h1 {
-        font-size: 1.5rem;
-      }
-      header img {
-        width: 80px;
-        height: 80px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
+<canvas id="space-bg"></canvas>
+<div class="container">
+  <header>
+    <img src="https://avatars.githubusercontent.com/u/217141310?s=400&v=4" alt="Avatar" id="avatar" />
+    <h1>Nguyễn Minh Duy</h1>
+  </header>
 
-  <div class="container">
-    <header>
-      <img src="https://avatars.githubusercontent.com/u/217141310?s=400&u=0a8c2c785b31a77a792f438339a32f0d3b267366&v=4" alt="Ảnh đại diện Nguyễn Minh Duy" />
-      <h1>Nguyễn Minh Duy</h1>
-    </header>
-
-    <!-- Ô nhập điều hướng -->
-    <div id="quick-nav">
-      <div class="search-box">
-        <!-- Icon kính lúp SVG -->
-        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="7" stroke="#777" stroke-width="2" fill="none"/>
-          <line x1="16" y1="16" x2="21" y2="21" stroke="#777" stroke-width="2"/>
-        </svg>
-        <input type="text" id="nav-input" placeholder="Nhập từ khoá và nhấn Enter..." />
-      </div>
-    </div>
-
-    <section class="contact-info-section">
-      <div class="contact-info">
-        <div>Email: <a href="mailto:ngduy10102006@gmail.com">ngduy10102006@gmail.com</a></div>
-        <div>Điện thoại: <a href="tel:+84329200210">0329200210</a></div>
-        <div>Facebook:<br/><a href="https://www.facebook.com/S999999" target="_blank">facebook.com/S999999</a></div>
-        <div>GreasyFork:<br/><a href="https://greasyfork.org/users/1485109" target="_blank">greasyfork.org/users/1485109</a></div>
-        <div>SourceForge:<br/><a href="https://sourceforge.net/u/duy1nuis/" target="_blank">sourceforge.net/u/duy1nuis/</a></div>
-        <div>Kho Apps:<br/><a href="https://duyxyz.github.io/app" target="_blank">duyxyz.github.io/app</a></div>
-        <div>GitHub:<br/>
-          <a href="https://github.com/duyxyz" target="_blank">duyxyz</a> |
-          <a href="https://github.com/DuyNguyen2k6" target="_blank">DuyNguyen2k6</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="footer">
-      © 2025 Nguyễn Minh Duy
-    </div>
+  <div class="search-box">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7" stroke-width="2"/>
+      <line x1="16" y1="16" x2="21" y2="21" stroke-width="2"/>
+    </svg>
+    <input type="text" id="nav-input" placeholder="Enter keyword and press Enter..." />
   </div>
 
-  <script>
-    const navInput = document.getElementById('nav-input');
-    navInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const keyword = navInput.value.trim();
-        if (keyword) {
-          const url = `https://duyxyz.github.io/${encodeURIComponent(keyword)}`;
-          window.location.href = url;
-        }
+  <div class="contact-info" id="contact">
+    <div><a href="mailto:ngduy10102006@gmail.com">Mail</a></div>
+    <div><a href="tel:+84329200210">Phone</a></div>
+    <div><a href="https://www.facebook.com/S999999" target="_blank">Facebook</a></div>
+    <div><a href="https://greasyfork.org/users/1485109" target="_blank">GreasyFork</a></div>
+    <div><a href="https://sourceforge.net/u/duy1nuis/" target="_blank">SourceForge</a></div>
+    <div><a href="https://duyxyz.github.io/app" target="_blank">App Store</a></div>
+  </div>
+
+  <div class="footer-buttons">
+    <a href="https://github.com/duyxyz" target="_blank" class="btn" title="GitHub">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+        <path d="M12 .5C5.37.5 0 5.87 0 12.46c0 5.28 3.438 9.747 8.205 11.322.6.113.82-.263.82-.583 0-.288-.011-1.048-.017-2.056-3.338.74-4.042-1.61-4.042-1.61-.546-1.4-1.333-1.774-1.333-1.774-1.09-.767.082-.752.082-.752 1.205.085 1.838 1.264 1.838 1.264 1.07 1.873 2.809 1.332 3.492 1.019.108-.794.418-1.332.762-1.638-2.665-.31-5.467-1.37-5.467-6.09 0-1.346.465-2.446 1.235-3.307-.124-.31-.535-1.556.117-3.244 0 0 1.008-.33 3.3 1.26a11.273 11.273 0 0 1 3.003-.414c1.02.005 2.046.14 3.003.414 2.29-1.59 3.296-1.26 3.296-1.26.654 1.688.243 2.934.12 3.244.772.861 1.232 1.961 1.232 3.307 0 4.73-2.807 5.776-5.479 6.082.43.372.814 1.103.814 2.222 0 1.605-.015 2.898-.015 3.293 0 .323.216.701.825.582C20.565 22.204 24 17.737 24 12.46 24 5.87 18.627.5 12 .5z"/>
+      </svg> GitHub
+    </a>
+    <a href="https://duyxyz.github.io/bank" target="_blank" class="btn" title="Buy me a coffee">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+        <path d="M18 3h-14v10c0 3.31 2.69 6 6 6h2c3.31 0 6-2.69 6-6v-1h2a3 3 0 0 0 0-6h-2v-3zm0 5h2a1 1 0 0 1 0 2h-2v-2z"/>
+      </svg> Buy me a coffee
+    </a>
+  </div>
+</div>
+
+<script>
+  document.getElementById('nav-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const keyword = e.target.value.trim();
+      if (keyword) {
+        window.location.href = `https://duyxyz.github.io/${encodeURIComponent(keyword)}`;
       }
+    }
+  });
+
+  // Toggle contact info
+  const avatar = document.getElementById('avatar');
+  const contact = document.getElementById('contact');
+  avatar.addEventListener('click', () => {
+    contact.classList.toggle('show');
+  });
+
+  // Space background
+  const canvas = document.getElementById('space-bg');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  function createStars(count) {
+    stars = [];
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5,
+        alpha: Math.random(),
+        speed: Math.random() * 0.2
+      });
+    }
+  }
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#fff";
+    stars.forEach(s => {
+      ctx.globalAlpha = s.alpha;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fill();
+      s.y += s.speed;
+      if (s.y > canvas.height) s.y = 0;
     });
-  </script>
+    ctx.globalAlpha = 1;
+  }
+  createStars(200);
+  function animate() {
+    drawStars();
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
 </body>
 </html>
